@@ -12,6 +12,7 @@ if (isset($_GET['excluir_aluno'])) {
 
     $stmt_excluir_aluno = $conexao->prepare("DELETE FROM aluno WHERE id = ?");
     $stmt_excluir_aluno->bind_param("i", $alunoId);
+    $stmt_excluir_aluno->execute();
 }
 
 $sql_aluno = "SELECT * FROM aluno JOIN livro ON aluno.id = livro.idAluno";
