@@ -27,7 +27,7 @@ h1{
     justify-content: center;
     align-items: center;
     top: 40%;
-    left: 30%;
+    left: 20%;
     gap:15rem;
 }
 img{
@@ -38,14 +38,12 @@ img:hover {
     transform: scale(1.1);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
-
-
 .mid a{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
+    width: 350px;
     height: 150px;
     background-color: #ebd532b2;
     border: none;
@@ -61,8 +59,9 @@ img:hover {
 }
 
 .mid a:hover {
-    background-color: #ebd532;
-    transform: scale(1.1);
+    background: rgb(195,191,34);
+    background: linear-gradient(0deg, rgba(195,191,34,0.9047268565629377) 0%, rgba(253,187,45,1) 100%);
+    transform: scale(1.1);  
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     font-size: 20px;
 }
@@ -78,7 +77,7 @@ footer{
     background: rgba(247, 247, 33, 0.699);
     bottom: 0;
     width: 100%;
-    height: 30px;
+    height: 32px;
 }
 p{
     display: flex;

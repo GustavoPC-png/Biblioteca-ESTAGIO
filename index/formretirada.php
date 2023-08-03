@@ -52,7 +52,7 @@
             <button class="btn-one">Enviar</button>
         </div>
         <footer>
-            <p>©️Escola Estadual de Ensino Fundamental Pio XI 2023</p> 
+            <p>©️Escola Estadual de Ensino Fundamental Pio XII 2023</p> 
         </footer>
     </form>
 </body>

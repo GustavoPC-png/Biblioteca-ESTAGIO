@@ -15,8 +15,16 @@ if (isset($_GET['excluir_aluno'])) {
     $stmt_excluir_aluno->execute();
 }
 
+$sql_aluno_atrasado = "SELECT * FROM aluno a JOIN livro l ON a.id=l.idAluno WHERE DATEDIFF(NOW(), l.retirada) >= 7";
+
+$resultado_aluno_atrasado=$conexao->query($sql_aluno_atrasado);
+$resultado_atrasados=$resultado_aluno_atrasado->fetch_all(MYSQLI_ASSOC);
+
+
+$conexao2 = new mysqli("localhost", "root", "", "biblioteca");
+
 $sql_aluno = "SELECT * FROM aluno JOIN livro ON aluno.id = livro.idAluno";
-$resultado_aluno = $conexao->query($sql_aluno);
+$resultado_aluno = $conexao2->query($sql_aluno);
 $alunos_com_livros = $resultado_aluno->fetch_all(MYSQLI_ASSOC);
 
 $conexao->close();
@@ -80,11 +88,11 @@ $conexao->close();
             <?php if (isset($alunos_com_livros)) : ?>
                 <?php foreach ($alunos_com_livros as $aluno) : ?>
                     <div class="aluno">
-                        <div class="aluno-info">
+                        <div class="aluno-info"> 
                             <h2>Detalhes do Aluno</h2>
                             <p>Nome: <?php echo $aluno['nome']; ?></p>
                             <p>Turma: <?php echo $aluno['turma']; ?></p>
-                            <p>Manhã/Tarde: <?php echo ($aluno['manha_tarde'] == 1) ? 'Manhã' : 'Tarde'; ?></p>
+                            <p>Turno: <?php echo ($aluno['manha_tarde'] == 1) ? 'Manhã' : 'Tarde'; ?></p>
                         </div>
                         <div class="livro-info">
                             <h2>Detalhes do Livro</h2>
@@ -102,7 +110,7 @@ $conexao->close();
         </div>
 
         <footer>
-            <p>©️Escola Estadual de Ensino Fundamental Pio XI 2023</p> 
+            <p>©️Escola Estadual de Ensino Fundamental Pio XII 2023</p> 
         </footer>
     </form>
 </body>
