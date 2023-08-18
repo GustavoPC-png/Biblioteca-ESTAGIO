@@ -10,7 +10,8 @@ header{
     height: 30px;
 }
 .top{
-    background: rgba(247, 247, 33, 0.699);
+    background-color: #E6E600;
+    color: #00FF00;
     gap: 20rem;
 }
 h1{
@@ -55,13 +56,12 @@ img:hover {
     color: #ffffff;
     gap: 5rem;
     cursor: pointer;
-    transition: background-color 0.5s, transform 0.5s, box-shadow 0.5s font-size 5s;
+    transition: all 0.5s;
 }
 
 .mid a:hover {
-    background: rgb(195,191,34);
-    background: linear-gradient(0deg, rgba(195,191,34,0.9047268565629377) 0%, rgba(253,187,45,1) 100%);
-    transform: scale(1.1);  
+    transform: scale(1.1);
+    background: rgb(195,191,34); 
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     font-size: 20px;
 }
@@ -177,7 +177,9 @@ h4{
 }
 button{
     position: absolute;
-    left: 40%;
+    display: flex;
+    justify-content: center;
+    left: 30%;
     top: 80%;
     width: 310px;
     height: 50px;

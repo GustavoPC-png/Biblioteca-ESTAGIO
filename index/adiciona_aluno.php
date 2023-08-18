@@ -4,9 +4,10 @@ session_start();
 if (isset($_POST['nome']) && isset($_POST['turma']) && isset($_POST['manha_tarde'])) {
     $conexao = new mysqli("localhost", "root", "", "biblioteca");
 
-    $sql_aluno = "INSERT INTO aluno (nome, turma, manha_tarde) VALUES (?, ?, ?)";
+    $sql_aluno = "INSERT INTO aluno (nome, turma, manha_tarde,idProfessor) VALUES (?, ?, ?,?)";
     $stmt_aluno = $conexao->prepare($sql_aluno);
-    $stmt_aluno->bind_param("sss", $_POST['nome'], $_POST['turma'], $_POST['manha_tarde']);
+    $stmt_aluno->bind_param("sssi", $_POST['nome'], $_POST['turma'], $_POST['manha_tarde'], $_SESSION['id']);
+
 
     if ($stmt_aluno->execute()) {
         $idAluno = $conexao->insert_id;
@@ -34,5 +35,5 @@ if (isset($_POST['nome']) && isset($_POST['turma']) && isset($_POST['manha_tarde
     echo "Dados incompletos para inserir o aluno.";
 }
 
-header("location: index.html");
+header("location: index.php");
 ?>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['id'])){
+        header("location: login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +18,7 @@
     <form action="adiciona_aluno.php" method="post" autocomplete="off">
         <header>
             <div class="top">
-                <a href="index.html"><img src="imgs/img-removebg-preview.png" alt="" width="90" height="90"></a>
+                <a href="index.php"><img src="imgs/img-removebg-preview.png" alt="" width="90" height="90"></a>
                 <h1>Biblioteca</h1>
             </div>
         </header>

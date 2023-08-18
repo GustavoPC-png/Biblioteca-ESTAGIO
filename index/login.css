@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 25px;
+}
+.tudo{
+    width: 100%;
+    height: 100%;
+}
+.coisa{
+    width: 50%;
+    height: 100vh;
+    background: url("https://www.freecodecamp.org/news/content/images/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg");
+}
+section{
+    display:flex;
+    justify-content: center;
+    position: absolute;
+    top: 18%;
+    left: 55%;
+    width: 600px;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+}
+.box{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top:25%;
+    gap: 3rem;
+}
+.input-box{
+    display: flex;
+    justify-content: center ;
+    flex-direction: column;
+}
+.a{
+    position: absolute;
+    bottom: 100%;
+    left: 10%;    
+}
+.a1{
+    position: absolute;
+    bottom:50%;
+    left: 10%;    
+}
+.input-box input{
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+}
+button{
+    position: absolute;
+    left: 20%;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+button:hover{
+    transform: translateY(-4px);
+    transition: 0.5s;
+}
+button:active{
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.1ms;
+}
+.input-box a{
+    position: absolute;
+    top: 130%;
+    left: 35%;
+}

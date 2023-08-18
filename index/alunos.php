@@ -1,33 +1,41 @@
 <?php
 session_start();
 
-$conexao = new mysqli("localhost", "root", "", "biblioteca");
-
-if (isset($_GET['excluir_aluno'])) {
-    $alunoId = $_GET['excluir_aluno'];
-
-    $stmt_excluir_livro = $conexao->prepare("DELETE FROM livro WHERE idAluno = ?");
-    $stmt_excluir_livro->bind_param("i", $alunoId);
-    $stmt_excluir_livro->execute();
-
-    $stmt_excluir_aluno = $conexao->prepare("DELETE FROM aluno WHERE id = ?");
-    $stmt_excluir_aluno->bind_param("i", $alunoId);
-    $stmt_excluir_aluno->execute();
-}
-
-$sql_aluno_atrasado = "SELECT * FROM aluno a JOIN livro l ON a.id=l.idAluno WHERE DATEDIFF(NOW(), l.retirada) >= 7";
-
-$resultado_aluno_atrasado=$conexao->query($sql_aluno_atrasado);
-$resultado_atrasados=$resultado_aluno_atrasado->fetch_all(MYSQLI_ASSOC);
+    if(!isset($_SESSION['id'])){
+            header("location: login.php");
+    }
 
 
-$conexao2 = new mysqli("localhost", "root", "", "biblioteca");
+    $conexao = new mysqli("localhost", "root", "", "biblioteca");
 
-$sql_aluno = "SELECT * FROM aluno JOIN livro ON aluno.id = livro.idAluno";
-$resultado_aluno = $conexao2->query($sql_aluno);
-$alunos_com_livros = $resultado_aluno->fetch_all(MYSQLI_ASSOC);
+    if (isset($_GET['excluir_aluno'])) {
+        $alunoId = $_GET['excluir_aluno'];
 
-$conexao->close();
+        $stmt_excluir_livro = $conexao->prepare("DELETE FROM livro WHERE idAluno = ?");
+        $stmt_excluir_livro->bind_param("i", $alunoId);
+        $stmt_excluir_livro->execute();
+
+        $stmt_excluir_aluno = $conexao->prepare("DELETE FROM aluno WHERE id = ?");
+        $stmt_excluir_aluno->bind_param("i", $alunoId);
+        $stmt_excluir_aluno->execute();
+    }   
+
+    $conexao4 = new mysqli("localhost", "root", "", "biblioteca");
+
+    if(isset($_GET['renovar_livro'])){
+        $rnvlivro = $_GET['renovar_livro'];
+    
+        $livroRenova = $conexao4->prepare("UPDATE livro l SET l.retirada = NOW() WHERE idAluno = ?");
+        $livroRenova->bind_param("i", $rnvlivro);
+        $livroRenova->execute();
+    }    
+    $conexao2 = new mysqli("localhost", "root", "", "biblioteca");
+
+    $sql_aluno = "SELECT * FROM aluno a JOIN livro ON a.id = livro.idAluno JOIN professor p ON a.idProfessor=p.id WHERE a.idProfessor=p.id";
+    $resultado_aluno = $conexao2->query($sql_aluno);
+    $alunos_com_livros = $resultado_aluno->fetch_all(MYSQLI_ASSOC);
+
+    $conexao->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +88,7 @@ $conexao->close();
     <form action="alunos.php" method="get" autocomplete="off">
         <header>
             <div class="top">
-                <a href="index.html"><img src="imgs/img-removebg-preview.png" alt="" width="90" height="90"></a>
+                <a href="index.php"><img src="imgs/img-removebg-preview.png" alt="" width="90" height="90"></a>
                 <h1>Biblioteca</h1>
             </div>
         </header>
@@ -93,15 +101,28 @@ $conexao->close();
                             <p>Nome: <?php echo $aluno['nome']; ?></p>
                             <p>Turma: <?php echo $aluno['turma']; ?></p>
                             <p>Turno: <?php echo ($aluno['manha_tarde'] == 1) ? 'Manhã' : 'Tarde'; ?></p>
+                            <p>Bibliotecario: <?php echo $aluno['nomeP']?></p>
                         </div>
                         <div class="livro-info">
                             <h2>Detalhes do Livro</h2>
                             <p>Título: <?php echo $aluno['titulo']; ?></p>
                             <p>Autor: <?php echo $aluno['autor']; ?></p>
                             <p>Retirada: <?php echo $aluno['retirada']; ?></p>
+                            <?php
+                                $dataRetirada = new DateTime($aluno['retirada']);
+                                $hoje = new DateTime();
+                                $diferenca = $hoje->diff($dataRetirada);
+                                $diasAtraso = $diferenca->days;
+
+                                if ($diasAtraso >= 7) {
+                                    echo '<p>Status: <span style="color: red;">Atrasado</span></p>';
+                                } else {
+                                    echo '<p>Status: <span style="color: green;">Em Dia</span></p>';
+                                }
+                            ?>
                         </div>
                         <a href="?excluir_aluno=<?php echo $aluno['idAluno']; ?>" class="delete-btn">Livro Devolvido</a>
-                        
+                        <a href="?renovar_livro=<?php echo $aluno['idAluno'];?>" class="renovar_btn">Renovar Data</a>
                     </div>
                 <?php endforeach; ?>
             <?php else : ?>
