@@ -11,7 +11,7 @@
 .coisa{
     width: 50%;
     height: 100vh;
-    background: url("https://www.freecodecamp.org/news/content/images/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg");
+    background: url("https://www.freecodecamp.org/news/content/images/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg") cover no-repeat;
 }
 section{
     display:flex;

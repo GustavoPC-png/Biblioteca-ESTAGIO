@@ -177,8 +177,6 @@ h4{
 }
 button{
     position: absolute;
-    display: flex;
-    justify-content: center;
     left: 30%;
     top: 80%;
     width: 310px;

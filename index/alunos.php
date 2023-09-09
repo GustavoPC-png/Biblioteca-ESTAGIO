@@ -25,13 +25,13 @@ session_start();
     if(isset($_GET['renovar_livro'])){
         $rnvlivro = $_GET['renovar_livro'];
     
-        $livroRenova = $conexao4->prepare("UPDATE livro l SET l.retirada = NOW() WHERE idAluno = ?");
+        $livroRenova = $conexao4->prepare("UPDATE aluno l SET l.retirada = NOW() WHERE id = ?");
         $livroRenova->bind_param("i", $rnvlivro);
         $livroRenova->execute();
     }    
     $conexao2 = new mysqli("localhost", "root", "", "biblioteca");
 
-    $sql_aluno = "SELECT * FROM aluno a JOIN livro ON a.id = livro.idAluno JOIN professor p ON a.idProfessor=p.id WHERE a.idProfessor=p.id";
+    $sql_aluno = "SELECT * FROM aluno a JOIN livro l ON l.id = a.idLivro WHERE l.id=a.idLivro;";
     $resultado_aluno = $conexao2->query($sql_aluno);
     $alunos_com_livros = $resultado_aluno->fetch_all(MYSQLI_ASSOC);
 
