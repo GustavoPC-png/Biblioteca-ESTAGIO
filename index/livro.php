@@ -4,6 +4,10 @@
     $sql = "SELECT * from livro l WHERE l.id = {$_GET['id']}";
     $resultado = $conn->query($sql);
     $livros = $resultado->fetch_all(MYSQLI_ASSOC);
+
+    $sql_aluno = "SELECT * FROM livro_retirada lr WHERE lr.id_livro={$_GET['id']}";
+    $resultado2 = $conn->query($sql_aluno);
+    $aluno_livro = $resultado2->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,11 +103,18 @@
                     <?php elseif($livro['status']=="indisponivel") :?>
                         <p class="status-unavailable">Indisponível</p>
                     <?php endif ?>
-                    <button>Retirar Livro</button>
+                    <a href="adicionaAluno.php?id=<?php echo $_GET['id']?>"><button>Retirar Livro</button></a>
+                    
                 </div>
                 <div class="alunos" style="border: 1px solid black;">
                     <p>Alunos que Ja pegaram o livro</p>
-
+                    <?php foreach($aluno_livro as $aluno) :?>
+                    <p>Nome do Aluno: <?php echo $aluno['nome_aluno'];?></p>
+                    <p>Turma do Aluno: <?php echo $aluno['turma'];?></p>
+                    <p>Data da Retirada: <?php echo $aluno['data_retirada'];?></p>
+                    <p>Data de Entrega: </p>
+                    <hr>
+                    <?php endforeach ?>
                 </div>
             </div>
         <?php endforeach ?>
