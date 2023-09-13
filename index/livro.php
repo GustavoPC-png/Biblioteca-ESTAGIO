@@ -8,6 +8,16 @@
     $sql_aluno = "SELECT * FROM livro_retirada lr WHERE lr.id_livro={$_GET['id']}";
     $resultado2 = $conn->query($sql_aluno);
     $aluno_livro = $resultado2->fetch_all(MYSQLI_ASSOC);
+    
+    if(isset($_POST['voltar'])){
+        header("location: index.php");
+    }
+    if(isset($_POST['devolver'])){
+        header("location:livroDevolve.php?id={$livro['id']}");
+    }
+    elseif(isset($_POST['retirar'])){
+        header("location:adicionaAluno.php?id={$livro['id']}");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +32,23 @@
             padding: 0;
            background-color: rgba(251, 251, 76, 0.977);
         }
-
+        .caixa{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 250px;
+            height: 250px;
+            gap: 2rem;
+            margin-right: 20px;
+        }
+        .caixa p{
+            padding: 20px;
+        }
+        .alunos{
+            width: 450px;
+            min-height: 250px;
+            text-align: center;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -79,18 +105,43 @@
                 padding: 40px;
             }
         }
-        button{
-            background-color: #fbd32b; /* Amarelo */
-            color: #333;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
+
+
+/* CSS */
+.button-32 {
+  background-color: #fff000;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button-32:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
 }
     </style>
 </head>
 <body>
+    <form action="" method="post">
     <div class="container">
         <?php foreach($livros as $livro) : ?>
             <div class="book-info">
@@ -99,12 +150,15 @@
                     <p><strong>Título:</strong> <?php echo $livro['titulo']?></p>
                     <p><strong>Autor:</strong> <?php echo $livro['autor']?></p>
                     <?php if($livro['status']=="disponivel") : ?>
-                        <p class="status-available">Disponível</p>
+                        <p class="status-available">Status: Disponível</p>
+                        <button class="button-32" role="button" name="retirar">Retirar Livro</button></a>
                     <?php elseif($livro['status']=="indisponivel") :?>
-                        <p class="status-unavailable">Indisponível</p>
+                        <p class="status-unavailable">Status: Indisponível</p>
+                        <button class="button-32" role="button" name="devolver">Devolver Livro</button></a>
                     <?php endif ?>
-                    <a href="adicionaAluno.php?id=<?php echo $_GET['id']?>"><button>Retirar Livro</button></a>
-                    
+
+                    <button name='voltar' class="button-32" role="button">Voltar</button>
+                        
                 </div>
                 <div class="alunos" style="border: 1px solid black;">
                     <p>Alunos que Ja pegaram o livro</p>
@@ -112,12 +166,19 @@
                     <p>Nome do Aluno: <?php echo $aluno['nome_aluno'];?></p>
                     <p>Turma do Aluno: <?php echo $aluno['turma'];?></p>
                     <p>Data da Retirada: <?php echo $aluno['data_retirada'];?></p>
-                    <p>Data de Entrega: </p>
+                    <?php if(is_null($aluno['data_entrega'])) : ?>
+
+                    <p style="color:red;">Status da Entrega: PENDENTE</p>
+                    <?php endif ?>
+                    <?php if(isset($aluno['data_entrega'])) : ?>
+                        <p style="color:grenn;">Status da Entrega: <?php echo $aluno['data_entrega'];?></p>
+                    <?php endif ?>
                     <hr>
                     <?php endforeach ?>
                 </div>
             </div>
         <?php endforeach ?>
     </div>
+    </form>
 </body>
 </html>
