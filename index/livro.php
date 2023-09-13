@@ -13,10 +13,10 @@
         header("location: index.php");
     }
     if(isset($_POST['devolver'])){
-        header("location:livroDevolve.php?id={$livro['id']}");
+        header("location:livroDevolve.php?id={$_GET['id']}");
     }
     elseif(isset($_POST['retirar'])){
-        header("location:adicionaAluno.php?id={$livro['id']}");
+        header("location:adicionaAluno.php?id={$_GET['id']}");
     }
 ?>
 <!DOCTYPE html>
@@ -145,7 +145,7 @@
     <div class="container">
         <?php foreach($livros as $livro) : ?>
             <div class="book-info">
-                <img src="<?php echo $livro['imagem'] ?>" alt="Book Cover">
+                <img src="<?php echo $livro['imagem'] ?>" width="500px" alt="Book Cover">
                 <div class="caixa">
                     <p><strong>Título:</strong> <?php echo $livro['titulo']?></p>
                     <p><strong>Autor:</strong> <?php echo $livro['autor']?></p>

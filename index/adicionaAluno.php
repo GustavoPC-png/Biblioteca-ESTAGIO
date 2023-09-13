@@ -4,7 +4,7 @@
     $nome = $_POST['nome_aluno'];
     $turma = $_POST['turma'];
 
-    $sql= "INSERT INTO livro_retirada (nome_aluno,turma,id_livro,data_retirada) VALUES('$nome',$turma,{$_GET['id']}, NOW()) ";
+    $sql = "INSERT INTO livro_retirada (nome_aluno, turma, id_livro, data_retirada) VALUES ('$nome', $turma, {$_GET['id']}, NOW())";
 
         if(isset($_POST['enviar'])){
         $resultado = $conn->query($sql);
@@ -25,9 +25,67 @@
 </head>
 <body>
     <form action="" method="POST">
+        <label for="">Nome:</label>
         <input type="text" name="nome_aluno" id="nome_aluno">
+        <label for="">Turma:</label>
         <input type="number" name="turma" id="turma">
         <input type="submit" value="Enviar" name="enviar">
     </form>
 </body>
 </html>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 95%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type="submit"] {
+  background-color: #fff000;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 50px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #2187c4;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form > * {
+  margin-top: 10px;
+}
+</style>
