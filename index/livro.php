@@ -24,7 +24,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Details</title>
+    <?php foreach($livros as $livro) : ?>
+    <title><?php echo $livro['titulo']?></title>
     <style>
                body {
             font-family: Arial, sans-serif;
@@ -143,7 +144,6 @@
 <body>
     <form action="" method="post">
     <div class="container">
-        <?php foreach($livros as $livro) : ?>
             <div class="book-info">
                 <img src="<?php echo $livro['imagem'] ?>" width="500px" alt="Book Cover">
                 <div class="caixa">
@@ -166,12 +166,12 @@
                     <p>Nome do Aluno: <?php echo $aluno['nome_aluno'];?></p>
                     <p>Turma do Aluno: <?php echo $aluno['turma'];?></p>
                     <p>Data da Retirada: <?php echo $aluno['data_retirada'];?></p>
-                    <?php if(is_null($aluno['data_entrega'])) : ?>
+                    <?php if($aluno['status']=="pendente") : ?>
 
                     <p style="color:red;">Status da Entrega: PENDENTE</p>
                     <?php endif ?>
-                    <?php if(isset($aluno['data_entrega'])) : ?>
-                        <p style="color:grenn;">Status da Entrega: <?php echo $aluno['data_entrega'];?></p>
+                    <?php if($aluno['status']=="entregue") : ?>
+                        <p style="color:grenn;">Data da Entrega: <?php echo $aluno['data_entrega'];?></p>
                     <?php endif ?>
                     <hr>
                     <?php endforeach ?>

@@ -25,7 +25,7 @@
 </head>
 <body>
     <form action="" method="POST">
-        <label for="">Nome:</label>
+        <label for="">Nome do Aluno:</label>
         <input type="text" name="nome_aluno" id="nome_aluno">
         <label for="">Turma:</label>
         <input type="number" name="turma" id="turma">

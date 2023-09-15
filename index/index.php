@@ -7,6 +7,10 @@ if(!isset($_SESSION['id'])){
     $resultado = $conn->query($sql);
     $livros = $resultado->fetch_all(MYSQLI_ASSOC);
 
+    if(isset($_POST['registro'])){
+      header("location: cadastrar_livro.php");
+    }
+
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ if(!isset($_SESSION['id'])){
     
 </head>
 <body>
-    <form action="" autocomplete="off">
+    <form action="" autocomplete="off" method="post">
         <header>
             <div class="top"> 
                 <h1>Biblioteca</h1>
@@ -28,7 +32,7 @@ if(!isset($_SESSION['id'])){
         <?php foreach($livros as $livro) : ?>
             <a href="livro.php?id=<?php echo $livro['id'];?>"><img src="<?php echo $livro['imagem']?>" alt=""></a>
         <?php endforeach ?>
-        <a href="cadastrar_livro.php"><button>Registrar Livro</button></a>
+        <a href="cadastrar_livro.php"><button name="registro">Registrar Livro</button></a>
         <footer>
             <p>©️Escola Estadual de Ensino Fundamental Pio XII 2023</p> 
         </footer>
