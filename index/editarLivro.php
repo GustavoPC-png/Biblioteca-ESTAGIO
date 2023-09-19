@@ -12,8 +12,10 @@
             $nomeArquivo = uniqid() . "_" . $_FILES["imagem"]["name"];
             $caminhoArquivo = $uploadDir . $nomeArquivo;
             
+            if(move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminhoArquivo)){
             $sql = "UPDATE livro l SET l.titulo = '{$_POST['titulo']}', l.autor = '{$_POST['autor']}', l.imagem = '$caminhoArquivo' WHERE l.id = {$_GET['id']}";
             $resultado = $conn->query($sql);
+            }
         }
         else{
             echo "<script> alert('Preencha todos os campos!') </script>";

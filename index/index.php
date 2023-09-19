@@ -8,6 +8,9 @@ include("db/db.php");
       header("location: cadastrar_livro.php");
     }
 
+    $sqlAlunosComLivro = "SELECT *, day(lr.data_retirada) AS dia, month(lr.data_retirada) as mes FROM livro_retirada lr WHERE  lr.data_retirada < (DATE_SUB(NOW(), INTERVAL 7 DAY)) AND lr.status = 'pendente'";
+    $result = $conn->query($sqlAlunosComLivro);
+    $alunosComLivro = $result->fetch_all(MYSQLI_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -26,8 +29,22 @@ include("db/db.php");
                 <h1>Biblioteca</h1>
             </div>
         </header>
+        <div class="boxBig">
+        <?php if($result) {
+          foreach($alunosComLivro as $aluno) : 
+          ?>
+          <a href="livro.php?id=<?php echo $aluno['id_livro'] ?>"><div class="aluno">
+            <div class="aluno-info">
+                <h2><?php echo $aluno['nome_aluno'];?></h2>
+                <p><?php echo $aluno['turma'];?></p>
+                <p>O aluno retirou um livro no dia <?php echo $aluno['dia'];?>/<?php echo $aluno['mes']?> e ainda não devolveu</p>
+            </div>
+          </div>
+          </a>
+          <?php endforeach;}?>
+          </div>
         <?php foreach($livros as $livro) : ?>
-            <a href="livro.php?id=<?php echo $livro['id'];?>"><img src="<?php echo $livro['imagem']?>" alt=""></a>
+            <a href="livro.php?id=<?php echo $livro['id'];?>"><img src="<?php echo $livro['imagem']?>" alt="" width="250px" height="250px"></a>
         <?php endforeach ?>
         <a href="cadastrar_livro.php"><button name="registro">Registrar Livro</button></a>
         <footer>
@@ -40,6 +57,56 @@ include("db/db.php");
     html, body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
+}
+
+.aluno {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+    left: -100%; 
+    width: 300px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    z-index: 1000; 
+    animation: slideIn 0.5s forwards; 
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+a{
+  text-decoration: none;
+}
+.aluno:hover {
+    cursor: pointer;
+    background-color: #0056b3;
+}
+
+
+.aluno-info {
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+
+.aluno a {
+    color: #fff;
+    text-decoration: none;
+}
+@keyframes slideIn {
+    from {
+        left: -100%; 
+    }
+    to {
+        left: 0; 
+    }
+}
+.boxBig{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .top{
     display: flex;
