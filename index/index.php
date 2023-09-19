@@ -1,8 +1,5 @@
 <?php
 include("db/db.php");
-if(!isset($_SESSION['id'])){
-        header("location: login.php");
-}
     $sql="SELECT * FROM livro";
     $resultado = $conn->query($sql);
     $livros = $resultado->fetch_all(MYSQLI_ASSOC);
@@ -99,6 +96,18 @@ footer {
   color: #fff;
   padding: 10px;
 }
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fbd32b; /* Amarelo */
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
 @media screen and (max-width: 768px) {
   header {
@@ -108,5 +117,6 @@ footer {
   .container img {
     max-width: 150px;
   }
-}
+  
+  }
 </style>

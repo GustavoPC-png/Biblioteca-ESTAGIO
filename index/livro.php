@@ -18,6 +18,9 @@
     elseif(isset($_POST['retirar'])){
         header("location:adicionaAluno.php?id={$_GET['id']}");
     }
+    elseif(isset($_POST['editar'])){
+        header("location:editarLivro.php?id={$_GET['id']}");
+    }   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +42,8 @@
             position: relative;
             width: 250px;
             height: 250px;
-            gap: 2rem;
-            margin-right: 20px;
+            gap: 1rem;
+            margin-right: 10px;
         }
         .caixa p{
             padding: 20px;
@@ -106,40 +109,37 @@
                 padding: 40px;
             }
         }
+        .button-32 {
+        background-color: #fff000;
+        border-radius: 12px;
+        color: #000;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 10px 15px;
+        text-align: center;
+        transition: 200ms;
+        width: 100%;
+        box-sizing: border-box;
+        border: 0;
+        font-size: 16px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        }
 
+        .button-32:not(:disabled):hover,
+        .button-32:not(:disabled):focus {
+        outline: 0;
+        background: #f4e603;
+        box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+        }
 
-/* CSS */
-.button-32 {
-  background-color: #fff000;
-  border-radius: 12px;
-  color: #000;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 10px 15px;
-  text-align: center;
-  transition: 200ms;
-  width: 100%;
-  box-sizing: border-box;
-  border: 0;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-32:not(:disabled):hover,
-.button-32:not(:disabled):focus {
-  outline: 0;
-  background: #f4e603;
-  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
-}
-
-.button-32:disabled {
-  filter: saturate(0.2) opacity(0.5);
-  -webkit-filter: saturate(0.2) opacity(0.5);
-  cursor: not-allowed;
-}
-    </style>
+        .button-32:disabled {
+        filter: saturate(0.2) opacity(0.5);
+        -webkit-filter: saturate(0.2) opacity(0.5);
+        cursor: not-allowed;
+        }
+            </style>
 </head>
 <body>
     <form action="" method="post">
@@ -157,6 +157,7 @@
                         <button class="button-32" role="button" name="devolver">Devolver Livro</button></a>
                     <?php endif ?>
 
+                    <button name="editar" class="button-32">Editar Livro</button>
                     <button name='voltar' class="button-32" role="button">Voltar</button>
                         
                 </div>
