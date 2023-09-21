@@ -14,6 +14,10 @@
             header("location: index.php");
         }
     }
+    if(isset($_POST['voltar'])){
+      
+        header("location: livro.php?id={$_GET['id']}");
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -30,6 +34,7 @@
         <label for="">Turma:</label>
         <input type="number" name="turma" id="turma">
         <input type="submit" value="Enviar" name="enviar">
+        <input type="submit" value="Voltar" name="voltar">
     </form>
 </body>
 </html>

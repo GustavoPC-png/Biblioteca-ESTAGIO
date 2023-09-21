@@ -54,7 +54,7 @@
         <label for="imagem">Imagem do Livro:</label>
         <input type="file" name="imagem" accept="image/*" required><br>
         <input type="submit" name="salvar" value="Salvar Edições">
-        <a href="index.php"><input type="button" value="Voltar" name="voltar"></a>
+        <a href="livro.php?id=<?php echo $_GET['id']; ?>"><input type="button" value="Voltar" name="voltar"></a>
         <?php endforeach;?>
     </form>
 </body>

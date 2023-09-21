@@ -74,7 +74,11 @@
 
         .book-info img {
             max-width: 100%;
-            height: auto;
+            margin-right: 20px;
+            height: 1000px;
+            box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.2);
+
+
         }
 
         .book-details {
@@ -145,7 +149,7 @@
     <form action="" method="post">
     <div class="container">
             <div class="book-info">
-                <img src="<?php echo $livro['imagem'] ?>" width="500px" alt="Book Cover">
+                <img src="<?php echo $livro['imagem'] ?>" width="500px" height="25px" alt="Book Cover">
                 <div class="caixa">
                     <p><strong>Título:</strong> <?php echo $livro['titulo']?></p>
                     <p><strong>Autor:</strong> <?php echo $livro['autor']?></p>
