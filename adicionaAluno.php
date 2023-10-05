@@ -4,12 +4,12 @@
     $nome = $_POST['nome_aluno'];
     $turma = $_POST['turma'];
 
-    $sql = "INSERT INTO livro_retirada (nome_aluno, turma, id_livro, data_retirada) VALUES ('$nome', $turma, {$_GET['id']}, NOW())";
+    $sql = "INSERT INTO livro_retirada (nome_aluno, turma, id_livro,serie,data_retirada) VALUES ('$nome', $turma, {$_GET['id']},{$_GET['serie']} ,NOW())";
 
         if(isset($_POST['enviar'])){
         $resultado = $conn->query($sql);
         if($resultado){
-            $sql_up = "UPDATE livro l SET l.status = 'indisponivel' WHERE l.id = {$_GET['id']};";
+            $sql_up = "UPDATE livro_seriado l SET l.status = 'indisponivel' WHERE l.id_livro = {$_GET['id']} AND l.seriado = {$_GET['serie']};";
             $enviar = $conn->query($sql_up);
             header("location: index.php");
         }

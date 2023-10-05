@@ -64,7 +64,7 @@
                 <p style="font-size: 20px;"><?php echo $livro['titulo'];?></p>
             </div>
         <?php endforeach; ?>
-        <?php endif;?>
+        <?php endif; ?>
 
 
         <?php if (isset($livrosPesquisados) && !empty($livrosPesquisados)) : ?>
@@ -84,6 +84,7 @@
 
         } ?>
         <a class="coiso" href="cadastrar_livro.php">Registrar Novo Livro</a>
+        <a href="registrar_serie.php"><input type="button" value="Registrar Serie ao livro" name="registro"></a>
     </form>
     <div class="pe">
     <footer>
@@ -129,6 +130,26 @@ p{
               gap: 20px;
           }
 
+          input[type="submit"],
+          input[type="button"] {
+          position: fixed; 
+          top: 89.5%;
+          left: 14%;
+          bottom: 40px;
+          background-color: #fbd32b;
+          color: #333;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: large;
+        }
+
+          input[type="submit"]:hover,
+          input[type="button"]:hover {
+              background-color: #f9c622; /* Amarelo mais escuro */
+          }
           .livro {
               text-align: center;
               background-color: #f5f5f5;

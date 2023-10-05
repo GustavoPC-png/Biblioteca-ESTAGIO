@@ -4,6 +4,7 @@ require_once("db/db.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $titulo = $_POST['titulo'];
     $autor = $_POST['autor'];
+    $publicacao = $_POST['publicacao'];
 
     $sql_verificacao = "SELECT * FROM livro WHERE titulo = '$titulo'";
     $resultado_verificacao = $conn->query($sql_verificacao);
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $caminhoArquivo = $uploadDir . $nomeArquivo;
 
         if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminhoArquivo)) {
-            $sql = "INSERT INTO livro (titulo, autor, imagem) VALUES ('$titulo', '$autor', '$caminhoArquivo')";
+            $sql = "INSERT INTO livro (titulo, autor, publicacao ,imagem) VALUES ('$titulo', '$autor', '$publicacao' ,'$caminhoArquivo')";
             $resultado = $conn->query($sql);
 
             if ($resultado) {
@@ -49,6 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="titulo" required><br>
         <label for="autor">Autor:</label>
         <input type="text" name="autor" required><br>
+        <label for="autor">Publicação:</label>
+        <input type="text" name="publicacao" required><br>
         <label for="imagem">Imagem do Livro:</label>
         <input type="file" name="imagem" accept="image/*" required><br>
         <input type="submit" value="Cadastrar">
